@@ -1,0 +1,17 @@
+django/bin/
+django/include/
+django/lib/
+django/local/
+django/sfroid/static/
+django/logs
+
+pynb/bin/
+pynb/include/
+pynb/lib/
+pynb/local/
+pynb/man/
+pynb/share/
+
+*.log
+*.pyc
+*.pem

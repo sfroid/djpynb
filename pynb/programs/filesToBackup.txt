@@ -1,0 +1,28 @@
+# empty lines are ignored,
+# and lines starting with a # are ignored
+
+# notebook folder
+../notebooks/*.ipynb
+../html/*
+../programs/*
+
+# ipython config stuff
+../../../.config/ipython/profile_nbserver/ipython_notebook_config.py
+../../../.config/ipython/profile_nbserver/static/custom/custom.css
+../../../.config/ipython/profile_nbserver_html/ipython_notebook_config.py
+../../../.config/ipython/profile_nbserver_html/static/custom/custom.css
+
+# django and gunicorn stuff
+../../django/website/website/settings.py
+../../django/bin/gunicorn_start.sh
+../../django/logs/gunicorn_supervisor.log
+../../django/logs/nginx-access.log
+../../django/logs/nginx-error.log
+
+# db backup scripts
+../../django/sfroid/runbackup.sh
+../../django/sfroid/dobackup.py
+
+# supervisor and nginx configs
+/etc/supervisor/conf.d/sfroidsvr.conf
+/etc/nginx/sites-available/sfroidsvr
