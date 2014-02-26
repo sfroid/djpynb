@@ -115,10 +115,10 @@ def doBackup():
 
     moveZipToDropboxFolder(zname)
     removeBackupFolder()
-    
+
     # dbbackup
     runDbBackup()
-    
+
     return count
 
 
@@ -138,4 +138,15 @@ def main():
 if __name__ == "__main__":
     #from pprint import pprint as pp
     #pp(getFilePathsToBackup())
-    main()
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 80))
+    ipa = s.getsockname()[0]
+    s.close()
+    if ipa == '192.168.1.112':
+        main()
+    else:
+        print "**********WARNING*******************"
+        print " Not running backup"
+        print " Invalid ip address %s detedted"%ipa
+        print " This script only works on 192.168.1.112"
