@@ -16,9 +16,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sfdjdb',
-        'USER': 'sfdjdbuser',
-        'PASSWORD': '2fDj3bUser',        #change this
+        'NAME': 'sfdb',
+        'USER': 'sfdbuser',
+        'PASSWORD': 'sfdbpwd',           #change this
         'HOST': 'localhost',
         'PORT': '',                      # Set to empty string for default.
     }
@@ -146,7 +146,7 @@ INSTALLED_APPS = (
     'menus',
     'south',
     'sekizai',
-    
+
     'cms.plugins.file',
     'cms.plugins.flash',
     'cms.plugins.googlemap',
@@ -157,11 +157,11 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'cms.plugins.video',
     'cms.plugins.twitter',
-    
+
     'cmsplugin_disqus',
-    'api',          # this is our app    
+    'api',          # this is our app
     'dbbackup',     # backup and restore for db
-    
+
 )
 
 DISQUS_SHORTNAME = 'jugaddisq'
