@@ -1730,7 +1730,7 @@ sudo apt-get install libpq-dev python-dev</code></pre>
 <pre><code>echo &quot;ALTER USER postgres WITH PASSWORD &#39;password&#39;;&quot; | sudo -u postgres psql postgres
 sudo -u postgres psql -q -c &quot;CREATE ROLE dbuser WITH CREATEDB LOGIN PASSWORD &#39;dbpassword&#39;;&quot;</code></pre>
 <pre><code># edit file if next command does not succeed
-echo &quot;local    sfdjdb    sfdjdbuser     md5&quot; &gt;&gt; /etc/postgresql/9.1/main/pg_hba.conf
+echo &quot;local    sfdjdb    sfdjdbuser     md5&quot; | sudo tee -a /etc/postgresql/9.1/main/pg_hba.conf
 
 sudo /etc/init.d/postgresql restart
 sudo -u postgres createdb -O sfdjdbuser -E UTF8 sfdjdb -T template0</code></pre>
