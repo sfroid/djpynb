@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>[]</title>
+<title>[Installing_django_cms]</title>
 <style type="text/css">
     .clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
 .clearfix:after{clear:both;}
@@ -1704,7 +1704,8 @@ Installing and configuring django cms
 <pre><code>pip install django-cms
 pip install cmsplugin-disqus
 pip install pillow
-pip install django-dbbackup</code></pre>
+pip install django-dbbackup
+pip install django-rss-plugin</code></pre>
 <p>The django-cms package automatically also installs the following</p>
 <ul>
 <li>django-cms ver 2.4.3</li>
@@ -1779,7 +1780,9 @@ DATABASES = {
 &#39;cms.plugins.twitter&#39;,
 
 &#39;cmsplugin_disqus&#39;,
-&#39;api&#39;,          # this is our app</code></pre>
+&#39;rssplugin&#39;,
+&#39;api&#39;,          # this is our app
+&#39;dbbackup&#39;,</code></pre>
 <br />
 <p>Also, enable the <code>django.contrib.admin</code> app.</p>
 </div>
