@@ -53,6 +53,38 @@ def check_custom_css():
         os.system("cp %s %s"%(fp1, fp2))
         print "Copied custom.css"
 
+def check_nginx_conf():
+    replace = False
+    try:
+        fp1 = '/etc/nginx/sites-available/sfroidsvr'
+        fp2 = '/home/sfroid/website/externals/nginx/sites-available/sfroidsvr'
+        dt1 = os.path.getmtime(fp1)
+        dt2 = os.path.getmtime(fp2)
+        replace = (dt1 > dt2)
+    except:
+        replace = True
+
+    if replace:
+        os.system("cp %s %s"%(fp1, fp2))
+        print "Copied nginx sfroidsvr conf"
+
+def check_supervisor_conf():
+    replace = False
+    try:
+        fp1 = '/etc/supervisor/conf.d/sfroidsvr.conf'
+        fp2 = '/home/sfroid/website/externals/supervisor/conf.d/sfroidsvr.conf'
+        dt1 = os.path.getmtime(fp1)
+        dt2 = os.path.getmtime(fp2)
+        replace = (dt1 > dt2)
+    except:
+        replace = True
+
+    if replace:
+        os.system("cp %s %s"%(fp1, fp2))
+        print "Copied supervisor conf"
+
+
+
 def check_custom_html_css():
     """This method keeps track of the changes in the main notebook custom.css file
     and updates the html profile custom.css if anyting changes"""
@@ -97,6 +129,9 @@ def mainloop():
 
         check_custom_html_css()
         check_custom_css()
+        check_nginx_conf()
+        check_supervisor_conf()
+
         time.sleep(5)
 
 if __name__ == '__main__':
