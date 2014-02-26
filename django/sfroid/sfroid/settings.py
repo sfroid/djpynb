@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'django.contrib.markup',
 
     'cms',
     'mptt',
@@ -158,7 +159,9 @@ INSTALLED_APPS = (
     'cms.plugins.video',
     'cms.plugins.twitter',
 
+    'cmsplugin_markdown',
     'cmsplugin_disqus',
+    'rssplugin',
     'api',          # this is our app
     'dbbackup',     # backup and restore for db
 
