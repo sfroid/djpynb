@@ -1,4 +1,4 @@
-{% load cms_tags menu_tags sekizai_tags %}
+{% load cms_tags menu_tags sekizai_tags mathjax %}
 <!DOCTYPE HTML>
 <html>
 
@@ -75,5 +75,6 @@
     </div>
   </div>
 {% render_block "js" %}
+{% mathjax_scripts %}
 </body>
 </html>

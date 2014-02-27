@@ -164,12 +164,25 @@ INSTALLED_APPS = (
     'rssplugin',
     'api',          # this is our app
     'dbbackup',     # backup and restore for db
+    'django_mathjax',
 
 )
 
 DISQUS_SHORTNAME = 'jugaddisq'
 DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
 DBBACKUP_FILESYSTEM_DIRECTORY = '/home/sfroid/Dropbox/backups/sfroid/dbbackup/'
+
+MATHJAX_ENABLED = True
+MATHJAX_CONFIG_FILE = "TeX-AMS-MML_HTMLorMML"
+MATHJAX_CONFIG_DATA = {
+  "tex2jax": {
+    "inlineMath":
+      [
+          ['$','$'],
+          ['\\(','\\)']
+      ]
+  }
+}
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
