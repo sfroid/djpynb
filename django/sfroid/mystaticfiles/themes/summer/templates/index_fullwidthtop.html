@@ -34,29 +34,12 @@
           {% show_menu 0 0 0 0 %}
         </ul>
     </div><!-- end nav -->
-  {% block slider %}
-  <div id="slider">
-      <!-- start slideshow -->
-      <div id="slideshow">
-      {% placeholder "slider_images" or %}
-      {# show_placeholder "slider_images" request.current_page.get_home_pk_cache #}
-        <img src="{{ STATIC_URL }}themes/summer/static/images/1.jpg" alt="image" width="920" height="250" border="0" />
-        <img src="{{ STATIC_URL }}themes/summer/static/images/2.jpg" alt="image" width="920" height="250" border="0" />
-        <img src="{{ STATIC_URL }}themes/summer/static/images/3.jpg" alt="image" width="920" height="250" border="0" />
-		<img src="{{ STATIC_URL }}themes/summer/static/images/4.jpg" alt="image" width="920" height="250" border="0" />
-      {% endplaceholder %}
-      </div>
-      <!-- end #slideshow -->
-      <div class="controls-outer">
-        <div id="slide_controls">
-          <ul id="slider_nav">
-          </ul>
-        </div>
-      </div>
-      <div class="clr"></div>
+    <div id="fulltop-container">
+	  <div id="fulltop">
+        {% placeholder "fullwidth-top" or %}
+	    {% endplaceholder %}
+	  </div>
     </div>
-    <!--/slider -->
-  {% endblock %}
 
 
     <div id="main">

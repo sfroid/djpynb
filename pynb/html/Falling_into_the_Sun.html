@@ -1709,46 +1709,46 @@ How strongly does the sun pull us?
 In&nbsp;[1]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="c"># script to calculate time to reach sun...</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-
-<span class="c"># physical constants/values</span>
-<span class="n">G</span> <span class="o">=</span> <span class="mf">6.67384e-11</span> <span class="c"># gravitational constant</span>
-<span class="n">MS</span> <span class="o">=</span> <span class="mf">1.98855e30</span> <span class="c"># mass of sun</span>
-<span class="n">esd</span> <span class="o">=</span> <span class="mf">149597870700.0</span> <span class="c"># earth-sun distance in meters</span>
-
-<span class="c"># program variables</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
-<span class="n">myconst1</span> <span class="o">=</span> <span class="p">(</span><span class="n">G</span><span class="o">*</span><span class="n">MS</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">esd</span><span class="o">*</span><span class="n">esd</span><span class="p">)</span>
-<span class="n">myconst2</span> <span class="o">=</span> <span class="n">esd</span><span class="o">/</span><span class="n">n</span>
-
-<span class="k">def</span> <span class="nf">getA</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; acceleration at distance (esd*k/n) from sun&quot;&quot;&quot;</span>
-    <span class="n">ak</span> <span class="o">=</span> <span class="n">myconst1</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ak</span>
-
-<span class="k">def</span> <span class="nf">getV</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; velocity at distance (esd*k/n) from sun&quot;&quot;&quot;</span>
-    <span class="n">vk</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">t</span>
-    <span class="k">return</span> <span class="n">vk</span>
-
-<span class="k">def</span> <span class="nf">getVAT</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">vold</span><span class="p">,</span> <span class="n">aold</span><span class="p">,</span> <span class="n">told</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; time to get from position (esd*k/n) to (esd*(k+1)/n)&quot;&quot;&quot;</span>
-    <span class="n">vk</span> <span class="o">=</span> <span class="n">getV</span><span class="p">(</span><span class="n">vold</span><span class="p">,</span> <span class="n">aold</span><span class="p">,</span> <span class="n">told</span><span class="p">)</span>
-    <span class="n">ak</span> <span class="o">=</span> <span class="n">getA</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-
-    <span class="n">tk</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vk</span><span class="o">*</span><span class="n">vk</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">ak</span><span class="o">*</span><span class="n">myconst2</span><span class="p">)</span> <span class="o">-</span> <span class="n">vk</span><span class="p">)</span><span class="o">/</span><span class="n">ak</span>
-    <span class="k">return</span> <span class="n">vk</span><span class="p">,</span> <span class="n">ak</span><span class="p">,</span> <span class="n">tk</span>
-
-<span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">sts</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">getVAT</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-    <span class="n">sts</span> <span class="o">+=</span> <span class="n">t</span>
-
-<span class="k">print</span> <span class="s">&quot;Travel time = </span><span class="si">%.2f</span><span class="s"> seconds</span><span class="se">\n</span><span class="s">Days = </span><span class="si">%5.3f</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">sts</span><span class="p">,</span> <span class="n">sts</span><span class="o">/</span><span class="p">(</span><span class="mf">60.0</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">))</span>
-<span class="k">print</span> <span class="s">&quot;Computation time = </span><span class="si">%5.4f</span><span class="s"> seconds&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">)</span>
+<div class="highlight"><pre>    <span class="c"># script to calculate time to reach sun...</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+    
+    <span class="c"># physical constants/values</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="mf">6.67384e-11</span> <span class="c"># gravitational constant</span>
+    <span class="n">MS</span> <span class="o">=</span> <span class="mf">1.98855e30</span> <span class="c"># mass of sun</span>
+    <span class="n">esd</span> <span class="o">=</span> <span class="mf">149597870700.0</span> <span class="c"># earth-sun distance in meters</span>
+    
+    <span class="c"># program variables</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+    <span class="n">myconst1</span> <span class="o">=</span> <span class="p">(</span><span class="n">G</span><span class="o">*</span><span class="n">MS</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">esd</span><span class="o">*</span><span class="n">esd</span><span class="p">)</span>
+    <span class="n">myconst2</span> <span class="o">=</span> <span class="n">esd</span><span class="o">/</span><span class="n">n</span>
+    
+    <span class="k">def</span> <span class="nf">getA</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; acceleration at distance (esd*k/n) from sun&quot;&quot;&quot;</span>
+        <span class="n">ak</span> <span class="o">=</span> <span class="n">myconst1</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ak</span>
+    
+    <span class="k">def</span> <span class="nf">getV</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; velocity at distance (esd*k/n) from sun&quot;&quot;&quot;</span>
+        <span class="n">vk</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">t</span>
+        <span class="k">return</span> <span class="n">vk</span>
+    
+    <span class="k">def</span> <span class="nf">getVAT</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">vold</span><span class="p">,</span> <span class="n">aold</span><span class="p">,</span> <span class="n">told</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; time to get from position (esd*k/n) to (esd*(k+1)/n)&quot;&quot;&quot;</span>
+        <span class="n">vk</span> <span class="o">=</span> <span class="n">getV</span><span class="p">(</span><span class="n">vold</span><span class="p">,</span> <span class="n">aold</span><span class="p">,</span> <span class="n">told</span><span class="p">)</span>
+        <span class="n">ak</span> <span class="o">=</span> <span class="n">getA</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    
+        <span class="n">tk</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vk</span><span class="o">*</span><span class="n">vk</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">ak</span><span class="o">*</span><span class="n">myconst2</span><span class="p">)</span> <span class="o">-</span> <span class="n">vk</span><span class="p">)</span><span class="o">/</span><span class="n">ak</span>
+        <span class="k">return</span> <span class="n">vk</span><span class="p">,</span> <span class="n">ak</span><span class="p">,</span> <span class="n">tk</span>
+    
+    <span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">sts</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">getVAT</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">sts</span> <span class="o">+=</span> <span class="n">t</span>
+    
+    <span class="k">print</span> <span class="s">&quot;Travel time = </span><span class="si">%.2f</span><span class="s"> seconds</span><span class="se">\n</span><span class="s">Days = </span><span class="si">%5.3f</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">sts</span><span class="p">,</span> <span class="n">sts</span><span class="o">/</span><span class="p">(</span><span class="mf">60.0</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&quot;Computation time = </span><span class="si">%5.4f</span><span class="s"> seconds&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stime</span><span class="p">)</span>
 </pre></div>
 
 </div>

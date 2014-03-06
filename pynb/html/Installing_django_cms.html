@@ -1705,7 +1705,9 @@ Installing and configuring django cms
 pip install cmsplugin-disqus
 pip install pillow
 pip install django-dbbackup
-pip install django-rss-plugin</code></pre>
+pip install django-rss-plugin
+pip install cmsplugin-markdown
+pip install Django-Mathjax</code></pre>
 <p>The django-cms package automatically also installs the following</p>
 <ul>
 <li>django-cms ver 2.4.3</li>
@@ -1780,6 +1782,8 @@ DATABASES = {
 &#39;cms.plugins.twitter&#39;,
 
 &#39;cmsplugin_disqus&#39;,
+&#39;cmsplugin_markdown&#39;,
+&#39;django_mathjax&#39;,
 &#39;rssplugin&#39;,
 &#39;api&#39;,          # this is our app
 &#39;dbbackup&#39;,</code></pre>
@@ -1854,6 +1858,22 @@ CMS_TEMPLATES = (
 ]</code></pre>
 <p>Add disqus support</p>
 <pre><code>DISQUS_SHORTNAME = &#39;jugaddisq&#39;</code></pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Add mathjax settings</p>
+<pre><code>MATHJAX_ENABLED = True
+MATHJAX_CONFIG_FILE = &quot;TeX-AMS-MML_HTMLorMML&quot;
+MATHJAX_CONFIG_DATA = {
+  &quot;tex2jax&quot;: {
+    &quot;inlineMath&quot;:
+      [
+          [&#39;$&#39;,&#39;$&#39;],
+          [&#39;\\(&#39;,&#39;\\)&#39;]
+      ]
+  }
+}</code></pre>
+<p>Also add the following to templates ``` {% load mathjax %}</p>
+<p>{% render_block &quot;js&quot; %} {% mathjax_scripts %} ```</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Set the url configuration as the follows</p>

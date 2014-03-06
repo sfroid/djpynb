@@ -120,13 +120,12 @@ TEMPLATE_DIRS = (
 )
 
 CMS_TEMPLATES = (
-    ('template_1.html', 'Template One'),
-    ('template_2.html', 'Template Two'),
     ('red/templates/index.html', 'Red Template'),
     ('blackandwhite/templates/index.html', 'BnW Template'),
     ('hfreesoftware/templates/index.html', 'hfree Template'),
     ('simple/templates/index.html', 'Simple Template'),
     ('summer/templates/index.html', 'Summer Template'),
+    ('summer/templates/index_fullwidthtop.html', 'Summer Full Width Top'),
 )
 
 INSTALLED_APPS = (

@@ -1,11 +1,9 @@
 body {
-	background:url('../images/body-bg.jpg');
-	background-repeat:repeat-x;
-	background-color:#FFF;
+	background-color:#082338;
 	margin:0;
 	padding:0;
-	font-family: Tahoma,Geneva,sans-serif;
-	font-size: 12px;
+	font-family: "PT Serif",Georgia,Times,"Times New Roman",serif;
+	font-size: 16px;
 	color: #444;
 }
 
@@ -49,20 +47,20 @@ h2 {
 
 h3 {
 	color: #36CBDF;
-	font-size: 17px;
+	font-size: 20px;
 	font-weight: normal;
 	margin-bottom: 10px;
 }
 
 h4 {
 	padding-bottom: 10px;
-	font-size: 15px;
+	font-size: 18px;
 	color: #999;
 }
 
 h5 {
 	padding-bottom: 10px;
-	font-size: 13px;
+	font-size: 16px;
 	color: #999;
 }
 
@@ -75,36 +73,44 @@ li {
 }
 
 li ol, li ul {
-	font-size: 1.0em;
+	font-size: 14px;
 	margin-bottom: 0;
 	padding-top: 5px;
 }
 
 #container {
-	width: 960px;
+	width: 1000px;
 	margin:0 auto;
 	padding: 0;
 	background: #fff;
-	
+
 }
 
 #container-inner {
 	width: 920px;
 	margin:0 auto;
-	padding: 0;
+	padding: 20px 0;
 	background: #fff;
 }
 
+span.sanguine {
+    color: #db0a87;
+}
+
+span.froid {
+    color: #00b6ff;
+}
 
 /*----------- Header -----------------*/
 #header {
-	padding: 0;
+	padding: 0 0 20px 0;
 	margin: 0 auto;
 }
 
 #header h1  {
+	font-family: Georgia, "Times New Roman", Times, serif;
 	padding-top: 15px;
-	padding-left: 15px;
+	padding-left: 5px;
 }
 
 #header h1 a {
@@ -118,7 +124,7 @@ li ol, li ul {
 #header p {
 	color: #000;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: bold;
 	margin-left: 12px;
 	margin-top: 0px;
@@ -129,9 +135,11 @@ li ol, li ul {
 
 /*----------- Navigation -----------------*/
 #nav {
+	font-family: Tahoma, Geneva, sans-serif;
 	height: 40px;
 	width: 920px;
-	background-color:#A20E1A;
+	background-color:#082338;
+	margin: 0 0 2px 0;
 }
 
 #nav ul {
@@ -150,24 +158,24 @@ li ol, li ul {
 #nav ul li a {
 	color: #fff;
 	display: block;
-	font-size: 14px;
-	padding: 12px 20px;
+	font-size: 15px;
+	padding: 10px 20px;
 	text-decoration: none;
 	text-transform: uppercase;
 }
 
 #nav ul li a:hover {
-	background: #000;
+	background: #0f4066;
 	color: #fff;
 }
 
 .left {
     float: left;
-}   
+}
 
 .right {
     float: right;
-}   
+}
 
 
 
@@ -184,6 +192,15 @@ div#slideshow { float: left; width: 100%; padding:0 0 21px 0; height: 241px; }
 #slide_controls ul li a:focus { outline: none; }
 #slide_controls ul li a:hover, #slide_controls ul li a.activeSlide { background:url('../images/tabs_1.gif') no-repeat center center; }
 
+
+/*----------- Slideshow -----------------*/
+#fulltop-container { width:920px; padding:0; margin:0 auto; }
+div#fulltop { float: left; width: 100%; padding:0 0 21px 0; }
+
+#fulltop img {
+    width: 920px;
+	height: 200px;
+}
 
 /*----------- Main Content -----------------*/
 #main {
@@ -232,7 +249,7 @@ div#slideshow { float: left; width: 100%; padding:0 0 21px 0; height: 241px; }
 	padding: 6px 7px;
 	margin: 0;
 	line-height: 1.5em;
-	font-size: 13px;
+	font-size: 14px;
 	color: #555;
 }
 
@@ -282,7 +299,7 @@ font-weight:bold;
 
 #footer p {
 	color: #999;
-	font-size: 10px;
+	font-size: 11px;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0 auto;
 	display: block;
@@ -296,24 +313,121 @@ font-weight:bold;
 
 
 
+
+
+
+/*
+Pretty Table Styling
+CSS Tricks also has a nice writeup: http://css-tricks.com/feature-table-design/
+*/
+
 table {
-	width: 100%;
-	text-align: left;
+	overflow: hidden;
+	border: 1px solid #d3d3d3;
+	background: #fefefe;
+	width: 80%;
+	margin: 10px auto 10px;
+	-moz-border-radius: 5px; /* FF1+ */
+	-webkit-border-radius: 5px; /* Saf3-4 */
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
-th, td {
-	padding: 10px 10px;
-}
+th, td {padding: 18px 28px 18px; text-align: center; }
 
-th {
-	color: #fff;
-	background: #1FAABE none repeat-x scroll left top;
-}
+th {padding-top: 22px; text-shadow: 1px 1px 1px #fff; background: #e8eaeb;}
+
+td {border-top: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0;}
+
+tr.odd-row td {background: #f6f6f6;}
+
+td.first, th.first {text-align: left}
+
+td.last {border-right: none;}
+
+/*
+Background gradients are completely unnecessary but a neat effect.
+*/
+
+/* bright
+#eaf4ff
+#dee8f2
+*/
 
 td {
-	background: #fff;
-	border-bottom: 1px solid #ccc;
+	background: -moz-linear-gradient(100% 25% 90deg, #eaf4ff, #dee8f2);
+	background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#dee8f2), to(#eaf4ff));
 }
+
+/* dark
+#e0efff
+#d5e3f2
+*/
+
+tr.odd-row td {
+	background: -moz-linear-gradient(100% 25% 90deg, #e0efff, #d5e3f2);
+	background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#d5e3f2), to(#e0efff));
+}
+
+/* header - dark
+#cbdef2
+#c0d3e5
+*/
+
+th {
+	background: -moz-linear-gradient(100% 20% 90deg, #c0d3e5, #cbdef2);
+	background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#cbdef2), to(#c0d3e5));
+}
+
+/*
+I know this is annoying, but we need additional styling so webkit will recognize rounded corners on background elements.
+Nice write up of this issue: http://www.onenaught.com/posts/266/css-inner-elements-breaking-border-radius
+
+And, since we've applied the background colors to td/th element because of IE, Gecko browsers also need it.
+*/
+tr:first-child th.first {
+	-moz-border-radius-topleft:5px;
+	-webkit-border-top-left-radius:5px; /* Saf3-4 */
+}
+
+tr:first-child th.last {
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-right-radius:5px; /* Saf3-4 */
+}
+
+tr:last-child td.first {
+	-moz-border-radius-bottomleft:5px;
+	-webkit-border-bottom-left-radius:5px; /* Saf3-4 */
+}
+
+tr:last-child td.last {
+	-moz-border-radius-bottomright:5px;
+	-webkit-border-bottom-right-radius:5px; /* Saf3-4 */
+}
+
+
+
+
+
+/*table {*/
+	/*width: 100%;*/
+	/*text-align: left;*/
+/*}*/
+
+/*th, td {*/
+	/*padding: 10px 10px;*/
+/*}*/
+
+/*th {*/
+	/*color: #fff;*/
+	/*background: #1FAABE none repeat-x scroll left top;*/
+/*}*/
+
+/*td {*/
+	/*background: #fff;*/
+	/*border-bottom: 1px solid #ccc;*/
+/*}*/
 
 blockquote {
 	display: block;
@@ -339,7 +453,7 @@ fieldset {
 
 fieldset legend {
 	font-weight: bold;
-	font-size: 13px;
+	font-size: 14px;
 	padding-right: 10px;
 	color: #555;
 }
@@ -360,7 +474,7 @@ form input, form select, form textarea {
 	border-right:1px solid #ddd;
 	border-bottom:1px solid #ddd;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 form input.formbutton {
@@ -369,7 +483,7 @@ form input.formbutton {
 	color: #ffffff;
 	font-weight: bold;
 	padding: 5px 10px;
-	font-size: 12px;
+	font-size: 14px;
 	font-family: Tahoma, Geneva, sans-serif;
 	letter-spacing: 1px;
 	width: auto;
