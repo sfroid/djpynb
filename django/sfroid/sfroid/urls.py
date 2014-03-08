@@ -12,6 +12,7 @@ urlpatterns = i18n_patterns('',
 
 urlpatterns = patterns('',
         url(r'^api/', include('api.urls')),
+        url(r'^reddit/', include('reddit.urls')),
         ) + urlpatterns
 
 if settings.DEBUG:

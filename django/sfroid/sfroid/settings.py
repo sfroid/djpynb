@@ -165,6 +165,8 @@ INSTALLED_APPS = (
     'dbbackup',     # backup and restore for db
     'django_mathjax',
 
+    'reddit',
+
 )
 
 DISQUS_SHORTNAME = 'jugaddisq'

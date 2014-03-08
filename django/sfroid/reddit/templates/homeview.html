@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <style>
+      img {
+        width: 800px;
+        }
+    </style>
+  </head>
+<body>
+  <div>
+    <span style="position:relative;left:20;"><a href="{{ prevlink }}">prev</a></span>
+    <span style="position:relative;right:-720;"><a  href="{{ nextlink }}">next</a></span>
+  </div>
+  <br /><hr />
+  {% if posts %}
+    {% for post in posts %}
+      <h2>[{{ post.subreddit }}] <a href="{{ post.linkToPage }}">{{ post.title }}</a> ({{ post.ncomments }}) </h2>
+      <a href="{{ post.url }}"><img src="{{ post.url }}"></img></a>
+      <br /><hr /><br />
+    {% endfor %}
+  {% else %}
+    <p>No posts.</p>
+  {% endif %}
+
+  <div>
+    <span style="position:relative;left:20;"><a href="{{ prevlink }}">prev</a></span>
+    <span style="position:relative;right:-720;"><a  href="{{ nextlink }}">next</a></span>
+  </div>
+  <br /><hr />
+  <p>Content from Reddit...</p>
+
+  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+  <!--<script>-->
+    <!--$('document').ready(function(){-->
+        <!--$("img").-->
+      <!--})-->
+  <!--</script>-->
+</body>
+</html>

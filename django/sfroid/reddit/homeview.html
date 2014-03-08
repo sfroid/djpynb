@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <style>
+      img {
+        width: 600px;
+        }
+    </style>
+  </head>
+<body>
+  <h1>Posts</h1>
+  {% if posts %}
+    {% for post in posts %}
+      <a href="{{ post.linkToPage }}"><h2>{{ post.title }} ({{ post.ncomments }})</h2></a>
+      <img src="{{ post.url }}"></img>
+      <hr />
+      <br />
+    {% endfor %}
+  {% else %}
+    <p>No posts.</p>
+  {% endif %}
+</body>
+</html>
