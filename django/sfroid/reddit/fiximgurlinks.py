@@ -15,7 +15,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sfroid.settings")
 from reddit.models import RedditPost
 
 
-testing = False
+testing = True
 
 def processPosts():
     for post in RedditPost.objects.all():

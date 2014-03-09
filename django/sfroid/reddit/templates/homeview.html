@@ -1,32 +1,91 @@
 <html>
   <head>
-    <style>
-      img {
-        width: 800px;
-        }
+	<style type="text/css">
+	  .buttonlinks {
+		-moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+		-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+		box-shadow:inset 0px 1px 0px 0px #dcecfb;
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #bddbfa), color-stop(1, #80b5ea) );
+		background:-moz-linear-gradient( center top, #bddbfa 5%, #80b5ea 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bddbfa', endColorstr='#80b5ea');
+		background-color:#bddbfa;
+		-webkit-border-top-left-radius:0px;
+		-moz-border-radius-topleft:0px;
+		border-top-left-radius:0px;
+		-webkit-border-top-right-radius:0px;
+		-moz-border-radius-topright:0px;
+		border-top-right-radius:0px;
+		-webkit-border-bottom-right-radius:0px;
+		-moz-border-radius-bottomright:0px;
+		border-bottom-right-radius:0px;
+		-webkit-border-bottom-left-radius:0px;
+		-moz-border-radius-bottomleft:0px;
+		border-bottom-left-radius:0px;
+		text-indent:0;
+		border:1px solid #84bbf3;
+		display:inline-block;
+		color:#ffffff;
+		font-family:Arial;
+		font-size:15px;
+		font-weight:normal;
+		font-style:normal;
+		height:40px;
+		line-height:40px;
+		width:100px;
+		text-decoration:none;
+		text-align:center;
+		text-shadow:1px 1px 0px #528ecc;
+	  }
+
+	  .buttonlinks:hover {
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
+		background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#80b5ea', endColorstr='#bddbfa');
+		background-color:#80b5ea;
+
+	  }.buttonlinks:active {
+		position:relative;
+		top:1px;
+	  }
+	  /* This button was generated using CSSButtonGenerator.com */
+
+	  img {
+		width: 885px;
+		}
+
+	  .linkleft {
+	    position: relative;
+		left: 0;
+	  }
+
+	  .linkright {
+	    position: relative;
+		right: -677;
+	  }
     </style>
   </head>
 <body>
   <div>
-    <span style="position:relative;left:20;"><a href="{{ prevlink }}">prev</a></span>
-    <span style="position:relative;right:-720;"><a  href="{{ nextlink }}">next</a></span>
+    <span class="linkleft buttonlinks"><a href="{{ prevlink }}">Prev page</a></span>
+    <span class="linkright buttonlinks"><a  href="{{ nextlink }}">Next page</a></span>
   </div>
-  <br /><hr />
+  <hr />
   {% if posts %}
     {% for post in posts %}
+      <br />
       <h2>[{{ post.subreddit }}] <a href="{{ post.linkToPage }}">{{ post.title }}</a> ({{ post.ncomments }}) </h2>
       <a href="{{ post.url }}"><img src="{{ post.url }}"></img></a>
-      <br /><hr /><br />
+      <br /><hr />
     {% endfor %}
   {% else %}
     <p>No posts.</p>
   {% endif %}
 
   <div>
-    <span style="position:relative;left:20;"><a href="{{ prevlink }}">prev</a></span>
-    <span style="position:relative;right:-720;"><a  href="{{ nextlink }}">next</a></span>
+    <span class="linkleft buttonlinks"><a href="{{ prevlink }}">Prev page</a></span>
+    <span class="linkright buttonlinks"><a  href="{{ nextlink }}">Next page</a></span>
   </div>
-  <br /><hr />
+  <hr />
   <p>Content from Reddit...</p>
 
   <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->

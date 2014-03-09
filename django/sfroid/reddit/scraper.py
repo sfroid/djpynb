@@ -41,8 +41,9 @@ def addPostToDB(subr, post):
     ncomments = post.num_comments
     url = post.url[:MAX_URL_LEN]
     if "imgur.com" in url:
-        if len(url.split('/')[-1].split('.')) == 1:
-            url += ".jpg"
+        if len(url.split('/')) <= 4:
+            if len(url.split('/')[-1].split('.')) == 1:
+                url += ".jpg"
 
     linkToPage = post.short_link[:MAX_LINK_LEN]
     subs = subr[:MAX_SUBR_LEN]
