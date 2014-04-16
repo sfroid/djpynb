@@ -1,3 +1,7 @@
+django.wpr
+django.wpu
+django/.cache/
+django/.ipython/
 django/bin/
 django/include/
 django/lib/
@@ -15,3 +19,5 @@ pynb/share/
 *.log
 *.pyc
 *.pem
+
+

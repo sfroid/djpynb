@@ -1,98 +1,87 @@
 <html>
   <head>
 	<style type="text/css">
-	  .buttonlinks {
-		-moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
-		-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
-		box-shadow:inset 0px 1px 0px 0px #dcecfb;
-		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #bddbfa), color-stop(1, #80b5ea) );
-		background:-moz-linear-gradient( center top, #bddbfa 5%, #80b5ea 100% );
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bddbfa', endColorstr='#80b5ea');
-		background-color:#bddbfa;
-		-webkit-border-top-left-radius:0px;
-		-moz-border-radius-topleft:0px;
-		border-top-left-radius:0px;
-		-webkit-border-top-right-radius:0px;
-		-moz-border-radius-topright:0px;
-		border-top-right-radius:0px;
-		-webkit-border-bottom-right-radius:0px;
-		-moz-border-radius-bottomright:0px;
-		border-bottom-right-radius:0px;
-		-webkit-border-bottom-left-radius:0px;
-		-moz-border-radius-bottomleft:0px;
-		border-bottom-left-radius:0px;
-		text-indent:0;
-		border:1px solid #84bbf3;
-		display:inline-block;
-		color:#ffffff;
-		font-family:Arial;
-		font-size:15px;
-		font-weight:normal;
-		font-style:normal;
-		height:40px;
-		line-height:40px;
-		width:100px;
-		text-decoration:none;
-		text-align:center;
-		text-shadow:1px 1px 0px #528ecc;
-	  }
-
-	  .buttonlinks:hover {
-		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
-		background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#80b5ea', endColorstr='#bddbfa');
-		background-color:#80b5ea;
-
-	  }.buttonlinks:active {
-		position:relative;
-		top:1px;
-	  }
-	  /* This button was generated using CSSButtonGenerator.com */
-
-	  img {
+	  img.mywidth {
 		width: 885px;
 		}
-
-	  .linkleft {
-	    position: relative;
-		left: 0;
-	  }
-
-	  .linkright {
-	    position: relative;
-		right: -677;
-	  }
     </style>
   </head>
 <body>
-  <div>
-    <span class="linkleft buttonlinks"><a href="{{ prevlink }}">Prev page</a></span>
-    <span class="linkright buttonlinks"><a  href="{{ nextlink }}">Next page</a></span>
+  <div id="funnyContainer">
   </div>
-  <hr />
-  {% if posts %}
-    {% for post in posts %}
-      <br />
-      <h2>[{{ post.subreddit }}] <a href="{{ post.linkToPage }}">{{ post.title }}</a> ({{ post.ncomments }}) </h2>
-      <a href="{{ post.url }}"><img src="{{ post.url }}"></img></a>
-      <br /><hr />
-    {% endfor %}
-  {% else %}
-    <p>No posts.</p>
-  {% endif %}
 
-  <div>
-    <span class="linkleft buttonlinks"><a href="{{ prevlink }}">Prev page</a></span>
-    <span class="linkright buttonlinks"><a  href="{{ nextlink }}">Next page</a></span>
+  <div id="showmorediv">
+	If you reached here, maybe there is no more stuff.
+	Or scroll up and back down to try again...
   </div>
   <hr />
   <p>Content from Reddit...</p>
 
-  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
-  <!--<script>-->
-    <!--$('document').ready(function(){-->
-        <!--$("img").-->
-      <!--})-->
-  <!--</script>-->
+  <!--now, update page when button scrolls into view-->
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <script>
+    $(function(){
+	  var querypage = 1;
+	  var lastTime = new Date().getTime() / 1000;
+
+	  var insertPosts = function (post){
+	    data = [
+		"\n<br />",
+		"<h2>[" + post.subreddit + "]",
+		'<a href="' + post.linkToPage + '">' + post.title + '</a> (' + post.ncomments + ') </h2>',
+		'<a href="' + post.url + '"><img style="width:800;" src="' + post.url + '"></img></a>',
+		'<br /><hr />',
+		].join('\n');
+
+		$("#funnyContainer").append(data);
+	  };
+
+	  var processJson = function(result) {
+		console.log('Hooray... got result');
+		console.log(result);
+		result.map(insertPosts);
+	  };
+
+	  var loadContent = function(){
+	    var apiurl = "/reddit/api/v1/get_posts?subr=funny&page=" + querypage + "&count=5";
+		console.log(apiurl);
+		$.getJSON(apiurl, processJson);
+		querypage = querypage + 1;
+	  };
+
+	  var nodeInScreen = function(node) {
+		var win = $(window);
+		var vbottom = win.scrollTop() + document.body.clientHeight;
+		var btop = node.offset().top;
+		console.log(btop, vbottom);
+		if (btop < vbottom) {
+		  return true;
+		}
+		return false;
+	  };
+
+	  var onScroll = function(){
+		if (nodeInScreen($("#showmorediv"))) {
+		  var currentTime = new Date().getTime()/1000;
+		  console.log('showmore visible');
+		  if (currentTime - lastTime > 0.2) {
+			console.log("will load stuff");
+			loadContent();
+			lastTime = currentTime;
+		  } else {
+		    console.log("too soon");
+		  }
+		};
+	  };
+
+	  $(window).scroll(onScroll);
+
+	  $(document).ready( function () {
+		loadContent();
+	  });
+	});
+  </script>
 </body>
 </html>

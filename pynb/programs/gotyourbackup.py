@@ -143,10 +143,10 @@ if __name__ == "__main__":
     s.connect(('8.8.8.8', 80))
     ipa = s.getsockname()[0]
     s.close()
-    if ipa == '192.168.1.112':
+    if ipa == '192.168.1.148':
         main()
     else:
         print "**********WARNING*******************"
         print " Not running backup"
         print " Invalid ip address %s detedted"%ipa
-        print " This script only works on 192.168.1.112"
+        print " This script only works on 192.168.1.148"

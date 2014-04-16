@@ -8,6 +8,7 @@
   </head>
 <body>
   <h1>Posts</h1>
+  <div id="container">
   {% if posts %}
     {% for post in posts %}
       <a href="{{ post.linkToPage }}"><h2>{{ post.title }} ({{ post.ncomments }})</h2></a>
@@ -18,5 +19,6 @@
   {% else %}
     <p>No posts.</p>
   {% endif %}
+  </div>
 </body>
 </html>

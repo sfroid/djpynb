@@ -169,7 +169,7 @@ INSTALLED_APPS = (
 
 )
 
-DISQUS_SHORTNAME = 'jugaddisq'
+DISQUS_SHORTNAME = 'sfroid'
 DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
 DBBACKUP_FILESYSTEM_DIRECTORY = '/home/sfroid/Dropbox/backups/sfroid/dbbackup/'
 

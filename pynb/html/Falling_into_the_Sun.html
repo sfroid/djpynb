@@ -1715,33 +1715,37 @@ In&nbsp;[1]:
     
     <span class="c"># physical constants/values</span>
     <span class="n">G</span> <span class="o">=</span> <span class="mf">6.67384e-11</span> <span class="c"># gravitational constant</span>
-    <span class="n">MS</span> <span class="o">=</span> <span class="mf">1.98855e30</span> <span class="c"># mass of sun</span>
-    <span class="n">esd</span> <span class="o">=</span> <span class="mf">149597870700.0</span> <span class="c"># earth-sun distance in meters</span>
+    <span class="n">massSun</span> <span class="o">=</span> <span class="mf">1.98855e30</span> <span class="c"># mass of sun</span>
+    <span class="n">earthSunDist</span> <span class="o">=</span> <span class="mf">149597870700.0</span> <span class="c"># earth-sun distance in meters</span>
     
-    <span class="c"># program variables</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
-    <span class="n">myconst1</span> <span class="o">=</span> <span class="p">(</span><span class="n">G</span><span class="o">*</span><span class="n">MS</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">esd</span><span class="o">*</span><span class="n">esd</span><span class="p">)</span>
-    <span class="n">myconst2</span> <span class="o">=</span> <span class="n">esd</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>     <span class="c"># number of steps in the simulation</span>
+
+    <span class="c"># program variables for easing computation</span>
+    <span class="n">myconst1</span> <span class="o">=</span> <span class="p">(</span><span class="n">G</span><span class="o">*</span><span class="n">massSun</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">earthSunDist</span><span class="o">*</span><span class="n">earthSunDist</span><span class="p">)</span>
+    <span class="n">myconst2</span> <span class="o">=</span> <span class="n">earthSunDist</span><span class="o">/</span><span class="n">n</span>
     
-    <span class="k">def</span> <span class="nf">getA</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; acceleration at distance (esd*k/n) from sun&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">getAcc</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; acceleration at distance (earthSunDist*k/n) from sun&quot;&quot;&quot;</span>
         <span class="n">ak</span> <span class="o">=</span> <span class="n">myconst1</span><span class="o">/</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ak</span>
     
-    <span class="k">def</span> <span class="nf">getV</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; velocity at distance (esd*k/n) from sun&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">getVel</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; velocity at distance (earthSunDist*k/n) from sun&quot;&quot;&quot;</span>
         <span class="n">vk</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">t</span>
         <span class="k">return</span> <span class="n">vk</span>
     
+    <span class="c"># get velocity, acceleration and time tuple for the next step</span>
     <span class="k">def</span> <span class="nf">getVAT</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">vold</span><span class="p">,</span> <span class="n">aold</span><span class="p">,</span> <span class="n">told</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; time to get from position (esd*k/n) to (esd*(k+1)/n)&quot;&quot;&quot;</span>
-        <span class="n">vk</span> <span class="o">=</span> <span class="n">getV</span><span class="p">(</span><span class="n">vold</span><span class="p">,</span> <span class="n">aold</span><span class="p">,</span> <span class="n">told</span><span class="p">)</span>
-        <span class="n">ak</span> <span class="o">=</span> <span class="n">getA</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="c"># we assume acceleration is constant in a simulation step</span>
+        <span class="n">vk</span> <span class="o">=</span> <span class="n">getVel</span><span class="p">(</span><span class="n">vold</span><span class="p">,</span> <span class="n">aold</span><span class="p">,</span> <span class="n">told</span><span class="p">)</span>
+        <span class="n">ak</span> <span class="o">=</span> <span class="n">getAcc</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
     
         <span class="n">tk</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vk</span><span class="o">*</span><span class="n">vk</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">ak</span><span class="o">*</span><span class="n">myconst2</span><span class="p">)</span> <span class="o">-</span> <span class="n">vk</span><span class="p">)</span><span class="o">/</span><span class="n">ak</span>
         <span class="k">return</span> <span class="n">vk</span><span class="p">,</span> <span class="n">ak</span><span class="p">,</span> <span class="n">tk</span>
     
     <span class="n">stime</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="c"># sts records total time</span>
     <span class="n">sts</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">getVAT</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
@@ -1763,7 +1767,7 @@ In&nbsp;[1]:
 <pre>
 Travel time = 5578753.47 seconds
 Days = 64.569
-Computation time = 1.0977 seconds
+Computation time = 1.1161 seconds
 
 </pre>
 </div>
@@ -1797,7 +1801,46 @@ The time taken by an object to fall into the sun is given by
 <p>Let us assume that the earth and the sun lie on the x axis and d is the distance between them. Also, at time t=0, let the earth be located at at x=0 and the sun at x=d.</p>
 <p>We know from Newton's Law of Gravitation that the force on earth due to the sun is given by</p>
 <p>\(F = \frac{GM_sm_e}{r^2}\)</p>
-<p>where \(F\): force in newtons;<br /> \(G\): gravitational constant (\(6.67384 \times 10^{-11}\text{ kg}^{-1}\text{m}^3\text{s}^{-2}\));<br /> \(M_s\): mass of the sun (\(1.989 \times 10^{30}\text{ kg}\) );<br /> \(m_e\): mass of the earth (\(5.972 \times 10^{24}\text{ kg}\) );<br /> \(r\): distance between earth and sun in meters.<br /> At \(t=0, r = d = 1.496 \times 10^{11}\text{ m}\).<br /></p>
+where
+<table>
+  <tr>
+    <td>
+\(F\)
+</td><td>
+force in newtons
+</td>
+  </tr>
+  <tr>
+    <td>
+\(G\)
+</td><td>
+gravitational constant (\(6.67384 \times 10^{-11}\text{ kg}^{-1}\text{m}^3\text{s}^{-2}\))
+</td>
+  </tr>
+  <tr>
+    <td>
+\(M_s\)
+</td><td>
+mass of the sun (\(1.989 \times 10^{30}\text{ kg}\) )
+</td>
+  </tr>
+  <tr>
+    <td>
+\(m_e\)
+</td><td>
+mass of the earth (\(5.972 \times 10^{24}\text{ kg}\) )
+</td>
+  </tr>
+  <tr>
+    <td>
+\(r\)
+</td><td>
+distance between earth and sun in meters
+</td>
+  </tr>
+</table>
+
+<p>At \(t=0, r = d = 1.496 \times 10^{11}\text{ m}\).<br /></p>
 <p>Let's solve this equation to find the time taken to fall into the sun:</p>
 <p>\(F = m_ea = \frac{GM_sm_e}{(d-x)^2}\)</p>
 <p>\(\implies a = \frac{GM_s}{(d-x)^2}\).</p>
@@ -1851,7 +1894,7 @@ Lets plot the progress of the projectile on a graph...
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[1]:
+In&nbsp;[2]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">atan</span><span class="p">,</span> <span class="n">pi</span>
@@ -1861,18 +1904,18 @@ In&nbsp;[1]:
 <span class="n">MS</span> <span class="o">=</span> <span class="mf">1.989e30</span> <span class="c"># mass of sun</span>
 <span class="n">d</span> <span class="o">=</span> <span class="mf">149600000000.0</span> <span class="c"># earth-sun distance in meters</span>
 
-<span class="k">def</span> <span class="nf">getT</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">getTime</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">d</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">G</span><span class="o">*</span><span class="n">MS</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">y</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">d</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span><span class="o">*</span><span class="n">atan</span><span class="p">((</span><span class="n">d</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="o">-</span><span class="n">y</span><span class="p">))))</span> <span class="o">+</span> <span class="n">d</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
     
 
-<span class="k">def</span> <span class="nf">findY</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">findDist</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="c"># given a particular t, find the value of y that fits</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">d</span>
     <span class="n">error</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">steps</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">steps</span> <span class="o">&lt;</span> <span class="mi">200</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
         <span class="n">ny</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
-        <span class="n">nt</span> <span class="o">=</span> <span class="n">getT</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
+        <span class="n">nt</span> <span class="o">=</span> <span class="n">getTime</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
         <span class="n">error</span> <span class="o">=</span> <span class="n">nt</span> <span class="o">-</span> <span class="n">t</span>
         <span class="n">steps</span> <span class="o">+=</span> <span class="mi">1</span>
         
@@ -1888,7 +1931,7 @@ In&nbsp;[1]:
 <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">z</span><span class="o">+</span><span class="mf">0.01</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">55782</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="o">-</span> <span class="n">findY</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">t</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="o">-</span> <span class="n">findDist</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">t</span><span class="p">]</span>
 
 <span class="n">figure</span><span class="p">()</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>

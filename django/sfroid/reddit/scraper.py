@@ -16,20 +16,33 @@ import praw, time
 from reddit.models import RedditPost
 import logging
 
-polltime = 60*60.0 # 60 mins
+subreddits = [
+    'simcity',
+    'funny',
+    'wtf',
+    'earthporn',
+    'aww',
+    'standupshots',
+    'imaginarycityscapes',
+    'cityporn',
+    'bridgeporn',
+    'infraredporn',
+    'mattepainting',
+    'roadporn',
+    'skyscrapers',
+    'viewporn',
+    'cyberpunk',
+              ]
+
+# poll once every minute
+timescale = 5.0
+polltime = len(subreddits)*60.0*timescale
 userAgent = "jugad_scraper"
 POSTS_TO_LOAD = 20
 MAX_TITLE_LEN = 290
 MAX_URL_LEN = 290
 MAX_LINK_LEN = 290
 MAX_SUBR_LEN = 90
-
-subreddits = ['funny',
-              'wtf',
-              'earthporn',
-              'aww',
-              'standupshots',
-              ]
 
 sleepTime = polltime/len(subreddits)
 
@@ -79,4 +92,5 @@ def startScraping():
 
 
 if __name__ == "__main__":
+    print "Starting the reddit data scraper"
     startScraping()
